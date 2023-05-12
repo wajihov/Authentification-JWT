@@ -1,0 +1,135 @@
+openapi: 3.0.2
+info:
+  title: Auth
+  version: 1.0.0
+paths:
+  /authenticate:
+    get:
+      tags:
+        - users
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/authenticateDto'
+          description: Get All Users
+      operationId: getAllUsers
+      summary: GetAllUsers
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/authenticateDto'
+      tags:
+        - users
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/authenticateDto'
+          description: Create User
+      operationId: CreateUser
+      summary: Create User
+      description: Create User
+  '/authenticate/{id}':
+    get:
+      tags:
+        - users
+      parameters:
+        -
+          name: id
+          description: A unique identifier for an Auth
+          schema:
+            type: integer
+          in: path
+          required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/authenticateDto'
+          description: Get User By Id
+      operationId: GetUserById
+      summary: Get One User By Id
+    put:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/authenticateDto'
+      tags:
+        - users
+      parameters:
+        -
+          name: id
+          description: A unique identifier for an Auth
+          schema:
+            format: int64
+            type: integer
+          in: path
+          required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/authenticateDto'
+          description: Modify User
+      operationId: UpdateUser
+      summary: Modify User
+    delete:
+      tags:
+        - users
+      parameters:
+        -
+          name: id
+          description: A unique identifier for an Auth
+          schema:
+            format: int64
+            type: integer
+          in: path
+          required: true
+      responses:
+        '200':
+          description: Delete User
+      operationId: DeleteUser
+      summary: Delete User
+    parameters:
+      -
+        name: id
+        description: A unique identifier for an Auth
+        schema:
+          format: int64
+          type: integer
+        in: path
+        required: true
+components:
+  schemas:
+    authenticateDto:
+      description: ''
+      required:
+        - id
+        - username
+        - email
+        - password
+      type: object
+      properties:
+        id:
+          format: int64
+          description: ''
+          type: integer
+        username:
+          description: ''
+          type: string
+        email:
+          description: ''
+          type: string
+        password:
+          description: ''
+          type: string
